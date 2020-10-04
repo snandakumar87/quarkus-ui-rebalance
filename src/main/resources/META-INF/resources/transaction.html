@@ -20,6 +20,7 @@
 </nav>
 
 <div style="padding: 70px;">
+    <h3>Incoming Transactions</h3>
     <table class="table table-dark table-striped">
         <thead style="font-weight: bold; background-color: black;">
         <td style="width:500px">ID</td>
@@ -29,6 +30,22 @@
 
         </thead>
         <tbody id="tbody">
+        </tbody>
+    </table>
+
+</div>
+
+<div style="padding: 70px;">
+    <h3>Whitelist Transactions</h3>
+    <table class="table table-dark table-striped">
+        <thead style="font-weight: bold; background-color: black;">
+        <td style="width:500px">ID</td>
+        <td style="width:500px">Amount</td>
+        <td style="width:500px">Country</td>
+        <td style="width:500px">Merchant Id</td>
+
+        </thead>
+        <tbody id="tbody1">
         </tbody>
     </table>
 
@@ -50,6 +67,15 @@
           var row = '<tr><td style=width:100px>' + obj.id + '</td><td style=width:100px>' + obj.amount + '</td><td style=width:100px>' + obj.country + '</td><td style=width:100px>' + obj.merchantId + '</td><td>';
 
         $('#tbody').append(row);
+    };
+
+    var source1 = new EventSource("/transaction/whitelist-stream");
+    source1.onmessage = function (event) {
+        var obj = JSON.parse(event.data);
+
+          var row = '<tr><td style=width:100px>' + obj.id + '</td><td style=width:100px>' + obj.amount + '</td><td style=width:100px>' + obj.country + '</td><td style=width:100px>' + obj.merchantId + '</td><td>';
+
+        $('#tbody1').append(row);
     };
 </script>
 </html>

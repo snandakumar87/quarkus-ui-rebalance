@@ -18,20 +18,8 @@ import org.eclipse.microprofile.reactive.messaging.Channel;
 public class TransactionResource {
 
     @Inject
-    @Channel("txn-from-kafka")
-    Publisher<Transaction> prices;
-
-    @Inject
     @Channel("txn")
     Publisher<Transaction> txns;
-
-    @GET
-    @Path("/stream")
-    @Produces(MediaType.SERVER_SENT_EVENTS) // denotes that server side events (SSE) will be produced
-    @SseElementType("text/plain") // denotes that the contained data, within this SSE, is just regular text/plain data
-    public Publisher<Transaction> stream() {
-        return prices;
-    }
 
     @GET
     @Path("/whitelist-stream")

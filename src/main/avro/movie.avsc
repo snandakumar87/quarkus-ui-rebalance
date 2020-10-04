@@ -1,0 +1,24 @@
+{
+	"type": "record",
+	"name": "transaction",
+	"namespace": "com.redhat",
+	"fields": [{
+			"name": "id",
+			"type": "string",
+			"minimum": 0
+		},
+		{
+			"name": "amount",
+			"type": "string"
+		},
+		{
+			"name": "country",
+			"type":"string"
+
+		},
+		{
+			"name": "merchantId",
+			"type": "string"
+		}
+	]
+}

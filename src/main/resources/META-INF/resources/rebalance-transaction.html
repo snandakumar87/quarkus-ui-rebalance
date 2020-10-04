@@ -46,7 +46,7 @@
 <script>
 
 
-    var source1 = new EventSource("/transaction/whitelist-stream");
+    var source1 = new EventSource("/transaction/stream");
     source1.onmessage = function (event) {
         var obj = JSON.parse(event.data);
 

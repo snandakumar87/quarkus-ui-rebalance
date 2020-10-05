@@ -42,7 +42,7 @@ public class KafkaRebalancedConsumerRebalanceListener implements KafkaConsumerRe
                                     .invoke(o -> LOGGER.info("Seeking to " + o))
                                     .onItem()
                                     .produceUni(o -> consumer
-                                            .seek(topicPartition,0L)
+                                            .seek(topicPartition, o == null ? 0L : o)
                                             .onItem()
                                             .invoke(v -> LOGGER.info("Seeked to " + o))
                                     );

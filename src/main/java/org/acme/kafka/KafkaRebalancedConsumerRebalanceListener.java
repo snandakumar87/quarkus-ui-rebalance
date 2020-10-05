@@ -46,7 +46,7 @@ public class KafkaRebalancedConsumerRebalanceListener implements KafkaConsumerRe
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrap);
         //props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "us-kafka-bootstrap-kafka-us.apps.myocp.com:443");
 
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, System.getenv("mp.messaging.incoming.txn.group.id"));
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
         props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "30000");
         Map<org.apache.kafka.common.TopicPartition, OffsetAndMetadata> newOffsets = null;
@@ -55,7 +55,7 @@ public class KafkaRebalancedConsumerRebalanceListener implements KafkaConsumerRe
         long shouldStartAt = now - 60000_000L; //10 minute ago
         try {
            newOffsets = RemoteClusterUtils.translateOffsets(
-                    props, bootstrap, groupId, Duration.ofMinutes(1));
+                    props,"operational-cluster" , groupId, Duration.ofMinutes(1));
            System.out.println("New offsets"+newOffsets);
         } catch (InterruptedException e) {
             e.printStackTrace();

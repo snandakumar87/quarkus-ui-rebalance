@@ -37,12 +37,12 @@ public class KafkaRebalancedConsumerRebalanceListener implements KafkaConsumerRe
                         .stream()
                         .map(topicPartition -> {
                             LOGGER.info("Assigned " + topicPartition);
-                            return consumer.offsetsForTimes(topicPartition, shouldStartAt)
+                            return consumer.endOffsets(topicPartition)
                                     .onItem()
                                     .invoke(o -> LOGGER.info("Seeking to " + o))
                                     .onItem()
                                     .produceUni(o -> consumer
-                                            .seek(topicPartition, o == null ? 0L : o.getOffset())
+                                            .seek(topicPartition,0L)
                                             .onItem()
                                             .invoke(v -> LOGGER.info("Seeked to " + o))
                                     );

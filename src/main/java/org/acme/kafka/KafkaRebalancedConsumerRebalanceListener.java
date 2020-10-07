@@ -37,7 +37,7 @@ public class KafkaRebalancedConsumerRebalanceListener implements KafkaConsumerRe
     public Uni<Void> onPartitionsAssigned(KafkaConsumer<?, ?> consumer, Set<TopicPartition> topicPartitions) {
         long now = System.currentTimeMillis();
 
-        long shouldStartAt = now - 60000_000L; //10 minute ago
+        long shouldStartAt = now - 60_000L; //10 minute ago
         return Uni
                 .combine()
                 .all()
